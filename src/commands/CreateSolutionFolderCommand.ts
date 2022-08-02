@@ -12,7 +12,7 @@ export class CreateSolutionFolderCommand extends CommandBase {
         super('Create solution folder');
 
         this.parameters = [
-            new InputTextCommandParameter('New folder name', '')
+            new InputTextCommandParameter('文件夹名称', '')
         ];
     }
 
@@ -26,12 +26,12 @@ export class CreateSolutionFolderCommand extends CommandBase {
         let projectInSolution: ProjectInSolution = (<any>item).projectInSolution;
         if (!projectInSolution) {
             if (item.solution.Projects.findIndex(p => p.projectName == args[0] && p.projectType == SolutionProjectType.SolutionFolder && !p.parentProjectGuid) >= 0) {
-                this.provider.logger.error('Can not create solution folder, the folder already exists');
+                this.provider.logger.error('未能创建解决方案文件夹，存在同名文件夹');
                 return;
             }
         } else {
             if (item.solution.Projects.findIndex(p => p.projectName == args[0] && p.projectType == SolutionProjectType.SolutionFolder && p.parentProjectGuid == projectInSolution.projectGuid) >= 0) {
-                this.provider.logger.error('Can not create solution folder, the folder already exists');
+                this.provider.logger.error('未能创建解决方案文件夹，存在同名文件夹');
                 return;
             }
         }
@@ -78,13 +78,13 @@ export class CreateSolutionFolderCommand extends CommandBase {
             
             if (done) {
                 await fs.writeFile(item.solution.FullPath, lines.join('\n'));
-                this.provider.logger.log("Solution folder created: " + args[0]);
+                this.provider.logger.log("解决方案文件夹已创建：" + args[0]);
             }
             else {
-                this.provider.logger.error('Can not create solution folder');
+                this.provider.logger.error('未能创建解决方案文件夹');
             }
         } catch(ex) {
-            this.provider.logger.error('Can not create solution folder: ' + ex);
+            this.provider.logger.error('未能创建解决方案文件夹：' + ex);
         }    
     }
 }

@@ -16,10 +16,10 @@ export class RefreshCommand extends CommandBase {
     protected runCommand(item: TreeItem, args: string[]): Promise<void> {       
         if (item) {
             item.refresh();
-            this.provider.logger.log("Refreshed " + item.path);
+            this.provider.logger.log("已刷新 " + item.path);
         } else {
             this.provider.refresh();
-            this.provider.logger.log("Refreshed");
+            this.provider.logger.log("已刷新");
         }
 
         return Promise.resolve();

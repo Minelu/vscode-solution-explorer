@@ -15,7 +15,7 @@ export class OpenSolutionCommand extends CommandBase {
 		    openLabel: 'Open solution',
     		canSelectFolders: false,
     		canSelectMany: false,
-		    filters: { 'Solution files': [ 'sln' ] }
+		    filters: { '解决方案文件': [ 'sln' ] }
         };
         this.parameters = [
             new OpenFileCommandParameter(options)

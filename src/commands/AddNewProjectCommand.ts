@@ -35,7 +35,7 @@ const ProjectTypes = [
 
 export class AddNewProjectCommand extends CliCommandBase {
     constructor(provider: SolutionExplorerProvider) {
-        super('Add new project', provider, 'dotnet');
+        super('添加新项目', provider, 'dotnet');
     }
 
     protected async runCommand(item: TreeItem, args: string[]): Promise<void> {
@@ -47,10 +47,10 @@ export class AddNewProjectCommand extends CliCommandBase {
         this.loadProjectTemplates();
         this.parameters = [
             new StaticCommandParameter('new'),
-            new InputOptionsCommandParameter('Select project type', this.getProjectTypes()),
-            new InputOptionsCommandParameter('Select language', () => this.getLanguages(), '-lang'),
-            new InputTextCommandParameter('Project name', '', '-n'),
-            new InputTextCommandParameter('Folder name', '', '-o', () => this.getDefaultFolder()),
+            new InputOptionsCommandParameter('选择项目类型', this.getProjectTypes()),
+            new InputOptionsCommandParameter('选择所使用语言', () => this.getLanguages(), '-lang'),
+            new InputTextCommandParameter('项目名称', '', '-n'),
+            new InputTextCommandParameter('文件夹名称', '', '-o', () => this.getDefaultFolder()),
         ];
 
         return true;
@@ -70,18 +70,29 @@ export class AddNewProjectCommand extends CliCommandBase {
             lines.forEach(line => {
                 let parts = line.split('  ').filter(element => element);
                 if (parts.length > 2) {
-                    ProjectTypes.push({
-                        name: parts[0].trim(),
-                        value: parts[1].trim(),
-                        languages: parts[2].split(',').map(element => element.trim().replace('[', '').replace(']', ''))
-                    });
+                    let littleTypes = parts[1].split(',').map(element => element.trim())
+                    if (littleTypes.length > 1) {
+                        littleTypes.forEach(littleType => {
+                            ProjectTypes.push({
+                                name: `${parts[0].trim()}(${littleType})`,
+                                value: littleType,
+                                languages: parts[2].split(',').map(element => element.trim().replace('[', '').replace(']', ''))
+                            });
+                        })
+                    } else {
+                        ProjectTypes.push({
+                            name: parts[0].trim(),
+                            value: littleTypes,
+                            languages: parts[2].split(',').map(element => element.trim().replace('[', '').replace(']', ''))
+                        });
+                    }
                 }
             });
         }
     }
 
-    private getProjectTypes(): { [id:string]: string } {
-        let result: { [id:string]: string } = {};
+    private getProjectTypes(): { [id: string]: string } {
+        let result: { [id: string]: string } = {};
         ProjectTypes.forEach(pt => {
             result[pt.name] = pt.value;
         });
@@ -89,7 +100,7 @@ export class AddNewProjectCommand extends CliCommandBase {
     }
 
     private getLanguages(): Promise<string[]> {
-        let result: string[] =  [ 'C#' ];
+        let result: string[] = ['C#'];
         let selectedProject = this.parameters[1].getArguments()[0];
         let index = ProjectTypes.findIndex(pt => pt.value == selectedProject);
         if (index >= 0)

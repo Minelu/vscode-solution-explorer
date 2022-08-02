@@ -9,12 +9,12 @@ import { InputOptionsCommandParameter } from "./parameters/InputOptionsCommandPa
 export class MoveToSolutionFolderCommand extends CommandBase {
 
     constructor(private readonly provider: SolutionExplorerProvider) {
-        super('Move to solution folder');
+        super('移动至解决方案文件夹');
     }
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
-            new InputOptionsCommandParameter('Select folder...', () => this.getFolders(item.solution))
+            new InputOptionsCommandParameter('选择文件夹...', () => this.getFolders(item.solution))
         ];
 
         return !!item.solution;
@@ -25,7 +25,7 @@ export class MoveToSolutionFolderCommand extends CommandBase {
 
         let projectInSolution: ProjectInSolution = (<any>item).projectInSolution;
         if (!projectInSolution) {
-            this.provider.logger.error('Can not move this item');
+            this.provider.logger.error('不能移动此文件');
             return;
         }
 
@@ -78,12 +78,12 @@ export class MoveToSolutionFolderCommand extends CommandBase {
 
             if (done) {
                 await fs.writeFile(item.solution.FullPath, lines.join('\n'));
-                this.provider.logger.log("Solution item moved");
+                this.provider.logger.log("解决方案已移动");
             } else {
-                this.provider.logger.error('Can not move this item');
+                this.provider.logger.error('不能移动此文件');
             }
         } catch(ex) {
-            this.provider.logger.error('Can not move this item: ' + ex);
+            this.provider.logger.error('不能移动此文件：' + ex);
         }    
     }
 

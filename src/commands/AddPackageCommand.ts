@@ -7,7 +7,7 @@ import { OptionalCommandParameter } from "./parameters/OptionalCommandParameter"
 
 export class AddPackageCommand extends CliCommandBase {
     constructor(provider: SolutionExplorerProvider) {
-        super('Add package', provider, 'dotnet');
+        super('添加包', provider, 'dotnet');
     }
 
     protected shouldRun(item: TreeItem): boolean {
@@ -15,8 +15,8 @@ export class AddPackageCommand extends CliCommandBase {
             new StaticCommandParameter('add'),
             new StaticCommandParameter(item.project.fullPath),
             new StaticCommandParameter('package'),
-            new InputTextCommandParameter('Package Name', ''),
-            new OptionalCommandParameter('Would you like to specify the package version?', new InputTextCommandParameter('Package version', '1.0.0.0', '-v'))
+            new InputTextCommandParameter('包名', ''),
+            new OptionalCommandParameter('是否需要指定包版本？', new InputTextCommandParameter('包版本', '1.0.0.0', '-v'))
         ];
 
         return true;

@@ -12,6 +12,6 @@ export class UnknownProjectTreeItem extends TreeItem {
     }
 
     protected createChildren(childContext: TreeItemContext): Promise<TreeItem[]> {  
-        return Promise.resolve([ new ErrorTreeItem(childContext, 'Unknown project type') ]);
+        return Promise.resolve([ new ErrorTreeItem(childContext, '未知项目类型') ]);
     }
 }

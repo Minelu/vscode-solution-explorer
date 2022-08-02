@@ -7,7 +7,7 @@ import { OpenFileCommandParameter } from "./parameters/OpenFileCommandParameter"
 
 export class AddExistingProjectCommand extends CliCommandBase {
     constructor(provider: SolutionExplorerProvider) {
-        super('Add existing project', provider, 'dotnet');
+        super('添加已存在的项目', provider, 'dotnet');
     }
 
     protected shouldRun(item: TreeItem): boolean {
@@ -15,7 +15,7 @@ export class AddExistingProjectCommand extends CliCommandBase {
 		    openLabel: 'Add',
     		canSelectFolders: false,
     		canSelectMany: false,
-		    filters: { 'Projects': [ 'csproj', 'vbproj', 'fsproj' ] }
+		    filters: { '项目文件': [ 'csproj', 'vbproj', 'fsproj' ] }
         };
         this.parameters = [
             new StaticCommandParameter('sln'),

@@ -8,10 +8,10 @@ import { InputTextCommandParameter } from "./parameters/InputTextCommandParamete
 export class CreateFolderCommand extends CommandBase {
 
     constructor(private readonly provider: SolutionExplorerProvider) {
-        super('Create folder');
+        super('新建文件夹');
 
         this.parameters = [
-            new InputTextCommandParameter('New folder name', '')
+            new InputTextCommandParameter('文件夹名称', '')
         ];
     }
 
@@ -29,9 +29,9 @@ export class CreateFolderCommand extends CommandBase {
                 
             let folderpath = path.join(targetpath, args[0]);
             await item.project.createFolder(folderpath);
-            this.provider.logger.log("Folder created: " + args[0]);
+            this.provider.logger.log("文件夹已创建：" + args[0]);
         } catch(ex) {
-            this.provider.logger.error('Can not create folder: ' + ex);
+            this.provider.logger.error('文件夹创建失败：' + ex);
         }    
     }
 }

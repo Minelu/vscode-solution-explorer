@@ -12,7 +12,7 @@ export class RenameCommand extends CommandBase {
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
-            new InputTextCommandParameter('New name', item.label, null, item.label)
+            new InputTextCommandParameter('新名称', item.label, null, item.label)
         ];
 
         return !!item.project;
@@ -29,9 +29,9 @@ export class RenameCommand extends CommandBase {
             else 
                 return;
 
-            this.provider.logger.log("Renamed: " + item.path + " -> " + args[0]);
+            this.provider.logger.log("已重命名: " + item.path + " -> " + args[0]);
         } catch(ex) {
-            this.provider.logger.error('Can not rename item: ' + ex);
+            this.provider.logger.error('未能重命名文件：' + ex);
         }    
     }
 }

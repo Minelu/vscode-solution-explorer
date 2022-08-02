@@ -23,9 +23,9 @@ export class DuplicateCommand extends CommandBase {
             let folder = path.dirname(filepath);
             let content = await fs.readFile(item.path, "utf8");
             filepath = await item.project.createFile(folder, filename, content);
-            this.provider.logger.log("File duplicated: " + filepath);
+            this.provider.logger.log("文件已复制：" + filepath);
         } catch(ex) {
-            this.provider.logger.error('Can not duplicate file: ' + ex);
+            this.provider.logger.error('未能复制文件：' + ex);
         }    
     }
 }

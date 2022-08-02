@@ -183,8 +183,8 @@ export class SolutionExplorerProvider extends vscode.Disposable implements vscod
 		}
 
 		if (templateEnginesToCreate.length > 0) {
-			let option = await vscode.window.showWarningMessage("Would you like to create the vscode-solution-explorer templates folder?", 'Yes', 'No');
-			if (option !== null && option !== undefined && option == 'Yes') {
+			let option = await vscode.window.showWarningMessage("是否创建解决方案管理插件配置文件夹?", '是', '否');
+			if (option !== null && option !== undefined && option == '是') {
 				for (let i = 0; i < templateEnginesToCreate.length; i++) {
 					await templateEnginesToCreate[i].creteTemplates();
 				}

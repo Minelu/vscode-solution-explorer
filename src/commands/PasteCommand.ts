@@ -59,9 +59,9 @@ export class PasteCommand extends CommandBase {
             
             let content = await fs.readFile(sourcepath, "utf8");
             filepath = await item.project.createFile(targetpath, filename, content);
-            this.provider.logger.log("File copied: " + sourcepath + ' -> ' + filepath);
+            this.provider.logger.log("文件已复制：" + sourcepath + ' -> ' + filepath);
         } catch(ex) {
-            this.provider.logger.error('Can not copy file: ' + ex);
+            this.provider.logger.error('未能复制文件：' + ex);
         }    
     }
 

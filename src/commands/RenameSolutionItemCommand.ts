@@ -14,7 +14,7 @@ export class RenameSolutionItemCommand extends CommandBase {
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
-            new InputTextCommandParameter('New solution name', item.label)
+            new InputTextCommandParameter('新解决方案名称：', item.label)
         ];
 
         return !!item.solution;
@@ -32,7 +32,7 @@ export class RenameSolutionItemCommand extends CommandBase {
                 
                 await this.renameFile(item.solution.FullPath, name);
 
-                this.provider.logger.log("Solution renamed: " + name);
+                this.provider.logger.log("已重命名解决方案：" + name);
                 this.provider.refresh();
             } else {
                 let data: string = await fs.readFile(item.solution.FullPath, 'utf8');
@@ -73,10 +73,10 @@ export class RenameSolutionItemCommand extends CommandBase {
                 }
 
                 await fs.writeFile(item.solution.FullPath, lines.join('\n'));
-                this.provider.logger.log("Solution item moved");
+                this.provider.logger.log("解决方案已移动");
             }
         } catch(ex) {
-            this.provider.logger.error('Can not rename this item: ' + ex);
+            this.provider.logger.error('未能重命名：' + ex);
         }    
     }
 

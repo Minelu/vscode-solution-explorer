@@ -12,7 +12,7 @@ export class MoveCommand extends CommandBase {
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
-            new InputOptionsCommandParameter('Select folder...', () => item.project.getFolderList())
+            new InputOptionsCommandParameter('选择文件夹...', () => item.project.getFolderList())
         ];
 
         return !!item.project;
@@ -30,9 +30,9 @@ export class MoveCommand extends CommandBase {
             else 
                 return;
 
-            this.provider.logger.log("Moved: " + item.path + " -> " + newPath);
+            this.provider.logger.log("已移动：" + item.path + " -> " + newPath);
         } catch(ex) {
-            this.provider.logger.error('Can not move item: ' + ex);
+            this.provider.logger.error('未能移动文件：' + ex);
         }    
     }
 }

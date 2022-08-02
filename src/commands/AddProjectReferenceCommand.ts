@@ -8,7 +8,7 @@ import { SolutionProjectType, ProjectInSolution } from "../model/Solutions";
 
 export class AddProjectReferenceCommand extends CliCommandBase {
     constructor(provider: SolutionExplorerProvider) {
-        super('Add project reference', provider, 'dotnet');
+        super('添加项目引用', provider, 'dotnet');
     }
 
     protected shouldRun(item: TreeItem): boolean {
@@ -16,7 +16,7 @@ export class AddProjectReferenceCommand extends CliCommandBase {
             new StaticCommandParameter('add'),
             new StaticCommandParameter(item.project.fullPath),
             new StaticCommandParameter('reference'),
-            new InputOptionsCommandParameter('Select project...', () => this.getCPSProjects(item))
+            new InputOptionsCommandParameter('选择项目...', () => this.getCPSProjects(item))
         ];
 
         return true;

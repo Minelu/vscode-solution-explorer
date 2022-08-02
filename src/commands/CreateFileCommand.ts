@@ -10,11 +10,11 @@ export class CreateFileCommand extends CommandBase {
     private _workspaceRoot: string = '';
     private _defaultExtension: string = '';
     constructor(private readonly provider: SolutionExplorerProvider) {
-        super('Create file');
+        super('新建文件');
 
         this.parameters = [
-            new InputTextCommandParameter('New file name', 'file.extension'),
-            new InputOptionsCommandParameter('Select template', () => this.getTemplatesTypes()),
+            new InputTextCommandParameter('文件名', '文件名.拓展名'),
+            new InputOptionsCommandParameter('选择模板', () => this.getTemplatesTypes()),
         ];
     }
 
@@ -39,9 +39,9 @@ export class CreateFileCommand extends CommandBase {
             const filepath = await item.project.createFile(targetpath, filename, content);
             const document = await vscode.workspace.openTextDocument(filepath);
             vscode.window.showTextDocument(document);
-            this.provider.logger.log("File created: " + filepath);
+            this.provider.logger.log("文件已创建：" + filepath);
         } catch(ex) {
-            this.provider.logger.error('Can not create file: ' + ex);
+            this.provider.logger.error('文件创建失败：' + ex);
         }
     }
 

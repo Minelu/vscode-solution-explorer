@@ -7,12 +7,12 @@ import { ConfirmCommandParameter } from "./parameters/ConfirmCommandParameter";
 export class DeleteCommand extends CommandBase {
 
     constructor(private readonly provider: SolutionExplorerProvider) {
-        super('Delete');
+        super('删除');
     }
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
-            new ConfirmCommandParameter('Are you sure you want to delete file "'+ item.label + '"?')
+            new ConfirmCommandParameter('确认删除文件 "'+ item.label + '" ?')
         ];
 
         return !!item.project;
@@ -28,9 +28,9 @@ export class DeleteCommand extends CommandBase {
             else 
                 return;
 
-            this.provider.logger.log("Deleted: " + item.path);
+            this.provider.logger.log("已删除：" + item.path);
         } catch(ex) {
-            this.provider.logger.error('Can not delete item: ' + ex);
+            this.provider.logger.error('未能删除文件：' + ex);
         }    
     }
 }

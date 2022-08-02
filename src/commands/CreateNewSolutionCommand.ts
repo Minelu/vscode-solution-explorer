@@ -6,14 +6,14 @@ import { InputTextCommandParameter } from "./parameters/InputTextCommandParamete
 
 export class CreateNewSolutionCommand extends CliCommandBase {
     constructor(provider: SolutionExplorerProvider) {
-        super('Create solution', provider, 'dotnet');
+        super('新建解决方案', provider, 'dotnet');
     }
 
     protected shouldRun(item: TreeItem): boolean {
         this.parameters = [
             new StaticCommandParameter('new'),
             new StaticCommandParameter('sln'),
-            new InputTextCommandParameter('Solution name', '', '-n')
+            new InputTextCommandParameter('解决方案名称', '', '-n')
         ];
 
         if (item && item.path) {
